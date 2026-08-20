@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+<<<<<<< HEAD
     "typecheck": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -14,12 +15,18 @@
   },
   "dependencies": {
     "firebase": "12.17.1",
+=======
+    "preview": "vite preview"
+  },
+  "dependencies": {
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
     "lucide-react": "^1.33.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@tailwindcss/vite": "^4.0.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
@@ -38,3 +45,16 @@
     "vite": "$vite"
   }
 }
+=======
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "oxlint": "^1.75.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^5.4.19"
+  }
+}
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27

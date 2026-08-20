@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import type { Ticket } from "../lib/types";
+<<<<<<< HEAD
 import { useApp } from "../lib/store";
+=======
+import { userById } from "../lib/seed";
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 import { StatusBadge } from "./StatusBadge";
 
 function formatDate(value: string) {
@@ -13,10 +17,13 @@ function formatDate(value: string) {
 }
 
 export function TicketTable({ tickets }: { tickets: Ticket[] }) {
+<<<<<<< HEAD
   const { users } = useApp();
   const assigneeName = (id: string | null) =>
     users.find((item) => item.id === id)?.name ?? "Unassigned";
 
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   if (!tickets.length) {
     return (
       <div
@@ -60,7 +67,11 @@ export function TicketTable({ tickets }: { tickets: Ticket[] }) {
                 <td className="px-4 py-3">
                   <StatusBadge status={ticket.status} />
                 </td>
+<<<<<<< HEAD
                 <td className="px-4 py-3">{assigneeName(ticket.assigneeId)}</td>
+=======
+                <td className="px-4 py-3">{userById(ticket.assigneeId ?? "")?.name ?? "Unassigned"}</td>
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
                 <td className="px-4 py-3" style={{ color: "var(--muted)" }}>
                   {formatDate(ticket.updatedAt)}
                 </td>
@@ -86,7 +97,11 @@ export function TicketTable({ tickets }: { tickets: Ticket[] }) {
             </div>
             <div className="mt-2 font-medium">{ticket.subject}</div>
             <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+<<<<<<< HEAD
               {ticket.category} · {assigneeName(ticket.assigneeId)}
+=======
+              {ticket.category} · {userById(ticket.assigneeId ?? "")?.name ?? "Unassigned"}
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
             </div>
           </Link>
         ))}

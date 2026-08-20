@@ -9,6 +9,7 @@ export type TicketStatus =
 
 export type ActivityKind = "note" | "status" | "assignment";
 
+<<<<<<< HEAD
 export type AuditAction =
   | "ticket.created"
   | "ticket.assigned"
@@ -20,6 +21,8 @@ export type AuditAction =
 
 export type TicketPriority = "Low" | "Normal" | "High" | "Urgent";
 
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 export type User = {
   id: string;
   name: string;
@@ -28,6 +31,7 @@ export type User = {
   title: string;
   emailVerified?: boolean;
   authProvider?: "firebase" | "demo";
+<<<<<<< HEAD
   avatarUrl?: string | null;
 };
 
@@ -52,6 +56,8 @@ export type AuditLog = {
   oldValue: string | null;
   newValue: string | null;
   createdAt: string;
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 };
 
 export type Activity = {
@@ -70,15 +76,21 @@ export type Ticket = {
   category: string;
   description: string;
   status: TicketStatus;
+<<<<<<< HEAD
   priority: TicketPriority;
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   submitterId: string;
   assigneeId: string | null;
   assignedById: string | null;
   assignedAt: string | null;
   createdAt: string;
   updatedAt: string;
+<<<<<<< HEAD
   resolvedAt: string | null;
   closedAt: string | null;
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   activity: Activity[];
 };
 
@@ -91,8 +103,11 @@ export const CATEGORIES = [
   "Other",
 ] as const;
 
+<<<<<<< HEAD
 export const PRIORITIES: TicketPriority[] = ["Low", "Normal", "High", "Urgent"];
 
+=======
+>>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 export const LIFECYCLE: TicketStatus[] = [
   "Open",
   "In Triage",
