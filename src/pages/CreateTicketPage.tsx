@@ -11,15 +11,10 @@ export function CreateTicketPage() {
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createdId, setCreatedId] = useState<string | null>(null);
-<<<<<<< HEAD
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
 
   async function onSubmit(event: FormEvent) {
-=======
-
-  function onSubmit(event: FormEvent) {
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
     event.preventDefault();
     const next: Record<string, string> = {};
     if (!category) next.category = "Category is required.";
@@ -27,7 +22,6 @@ export function CreateTicketPage() {
     if (description.trim().length > 2000) next.description = "Keep the description under 2,000 characters.";
     if (subject.trim().length > 120) next.subject = "Keep the subject under 120 characters.";
     setErrors(next);
-<<<<<<< HEAD
     setFormError("");
     if (Object.keys(next).length) return;
 
@@ -45,16 +39,6 @@ export function CreateTicketPage() {
     } finally {
       setSubmitting(false);
     }
-=======
-    if (Object.keys(next).length) return;
-    const ticket = createTicket({
-      subject: subject.trim() || description.trim().slice(0, 72),
-      category,
-      description: description.trim(),
-    });
-    setCreatedId(ticket.id);
-    navigate(`/tickets/${ticket.id}`);
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   }
 
   return (
@@ -134,7 +118,6 @@ export function CreateTicketPage() {
           <Link to="/" className="px-4 py-2 text-sm" style={{ color: "var(--muted)" }}>
             Cancel
           </Link>
-<<<<<<< HEAD
           <button
             type="submit"
             className="gold-btn rounded-[8px] px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
@@ -148,12 +131,6 @@ export function CreateTicketPage() {
             {formError}
           </p>
         ) : null}
-=======
-          <button type="submit" className="gold-btn rounded-[8px] px-5 py-2.5 text-sm font-semibold">
-            Submit ticket
-          </button>
-        </div>
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
       </form>
       {createdId ? (
         <p className="mt-4 text-sm">
