@@ -1,5 +1,8 @@
 import type { Ticket, User } from "./types";
 
+type SeedTicket = Omit<Ticket, "priority" | "resolvedAt" | "closedAt"> &
+  Partial<Pick<Ticket, "priority" | "resolvedAt" | "closedAt">>;
+
 export const USERS: User[] = [
   {
     id: "u-marcus",
@@ -43,7 +46,7 @@ function act(
   return { id, at, userId, kind, message, from, to };
 }
 
-export const SEED_TICKETS: Ticket[] = [
+const RAW_SEED_TICKETS: SeedTicket[] = [
   {
     id: "HD-2408",
     subject: "VPN disconnects during standup",
@@ -161,6 +164,13 @@ export const SEED_TICKETS: Ticket[] = [
     ],
   },
 ];
+
+export const SEED_TICKETS: Ticket[] = RAW_SEED_TICKETS.map((ticket) => ({
+  priority: "Normal",
+  resolvedAt: ticket.status === "Resolved" || ticket.status === "Closed" ? ticket.updatedAt : null,
+  closedAt: ticket.status === "Closed" ? ticket.updatedAt : null,
+  ...ticket,
+}));
 
 export function userById(id: string) {
   return USERS.find((u) => u.id === id);

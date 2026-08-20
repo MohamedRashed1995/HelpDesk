@@ -1,9 +1,8 @@
 import { useApp } from "../lib/store";
-import { userById } from "../lib/seed";
 import { LIFECYCLE, type TicketStatus } from "../lib/types";
 
 export function AnalyticsPage() {
-  const { tickets } = useApp();
+  const { tickets, users } = useApp();
   const byStatus = Object.fromEntries(LIFECYCLE.map((status) => [status, tickets.filter((t) => t.status === status).length])) as Record<
     TicketStatus,
     number
@@ -61,7 +60,9 @@ export function AnalyticsPage() {
           <ul className="mt-5 space-y-3 text-sm">
             {Object.entries(byAssignee).map(([id, count]) => (
               <li key={id} className="flex justify-between border-b pb-2" style={{ borderColor: "var(--border)" }}>
-                <span>{id === "unassigned" ? "Unassigned" : userById(id)?.name}</span>
+                <span>
+                  {id === "unassigned" ? "Unassigned" : (users.find((item) => item.id === id)?.name ?? id)}
+                </span>
                 <span>{count}</span>
               </li>
             ))}
