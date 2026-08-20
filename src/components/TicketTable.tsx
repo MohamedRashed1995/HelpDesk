@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Ticket } from "../lib/types";
-import { userById } from "../lib/seed";
+import { useApp } from "../lib/store";
 import { StatusBadge } from "./StatusBadge";
 
 function formatDate(value: string) {
@@ -13,6 +13,10 @@ function formatDate(value: string) {
 }
 
 export function TicketTable({ tickets }: { tickets: Ticket[] }) {
+  const { users } = useApp();
+  const assigneeName = (id: string | null) =>
+    users.find((item) => item.id === id)?.name ?? "Unassigned";
+
   if (!tickets.length) {
     return (
       <div
@@ -56,7 +60,7 @@ export function TicketTable({ tickets }: { tickets: Ticket[] }) {
                 <td className="px-4 py-3">
                   <StatusBadge status={ticket.status} />
                 </td>
-                <td className="px-4 py-3">{userById(ticket.assigneeId ?? "")?.name ?? "Unassigned"}</td>
+                <td className="px-4 py-3">{assigneeName(ticket.assigneeId)}</td>
                 <td className="px-4 py-3" style={{ color: "var(--muted)" }}>
                   {formatDate(ticket.updatedAt)}
                 </td>
@@ -82,7 +86,7 @@ export function TicketTable({ tickets }: { tickets: Ticket[] }) {
             </div>
             <div className="mt-2 font-medium">{ticket.subject}</div>
             <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-              {ticket.category} · {userById(ticket.assigneeId ?? "")?.name ?? "Unassigned"}
+              {ticket.category} · {assigneeName(ticket.assigneeId)}
             </div>
           </Link>
         ))}

@@ -195,7 +195,7 @@ export function AppShell() {
               Sign out?
             </h2>
             <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-              You will need corporate SSO to return to the workspace.
+              You will need to sign in again to return to the workspace.
             </p>
             <div className="mt-6 flex justify-end gap-3">
               <button type="button" className="px-4 py-2 text-sm" onClick={() => setConfirmOut(false)}>
@@ -206,7 +206,7 @@ export function AppShell() {
                 className="gold-btn rounded-[6px] px-4 py-2 text-sm font-semibold"
                 onClick={() => {
                   logout();
-                  navigate("/login");
+                  navigate("/signin");
                 }}
               >
                 Sign out

@@ -9,6 +9,17 @@ export type TicketStatus =
 
 export type ActivityKind = "note" | "status" | "assignment";
 
+export type AuditAction =
+  | "ticket.created"
+  | "ticket.assigned"
+  | "ticket.status"
+  | "ticket.priority"
+  | "ticket.resolved"
+  | "ticket.closed"
+  | "ticket.note";
+
+export type TicketPriority = "Low" | "Normal" | "High" | "Urgent";
+
 export type User = {
   id: string;
   name: string;
@@ -17,6 +28,30 @@ export type User = {
   title: string;
   emailVerified?: boolean;
   authProvider?: "firebase" | "demo";
+  avatarUrl?: string | null;
+};
+
+/** Shape of a `users/{uid}` document in Firestore. */
+export type UserProfileDoc = {
+  uid: string;
+  email: string;
+  displayName: string;
+  role: Role;
+  emailVerified: boolean;
+  avatarUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/** Shape of an `auditLogs/{logId}` document in Firestore. */
+export type AuditLog = {
+  id: string;
+  ticketId: string;
+  actorId: string;
+  action: AuditAction;
+  oldValue: string | null;
+  newValue: string | null;
+  createdAt: string;
 };
 
 export type Activity = {
@@ -35,12 +70,15 @@ export type Ticket = {
   category: string;
   description: string;
   status: TicketStatus;
+  priority: TicketPriority;
   submitterId: string;
   assigneeId: string | null;
   assignedById: string | null;
   assignedAt: string | null;
   createdAt: string;
   updatedAt: string;
+  resolvedAt: string | null;
+  closedAt: string | null;
   activity: Activity[];
 };
 
@@ -52,6 +90,8 @@ export const CATEGORIES = [
   "Email",
   "Other",
 ] as const;
+
+export const PRIORITIES: TicketPriority[] = ["Low", "Normal", "High", "Urgent"];
 
 export const LIFECYCLE: TicketStatus[] = [
   "Open",
