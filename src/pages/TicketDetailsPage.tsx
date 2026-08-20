@@ -1,11 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import { StatusBadge } from "../components/StatusBadge";
-<<<<<<< HEAD
 import { canAssign } from "../lib/permissions";
-=======
-import { userById } from "../lib/seed";
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 import { useApp } from "../lib/store";
 import { LIFECYCLE, NEXT_STATUS } from "../lib/types";
 
@@ -35,30 +31,19 @@ export function TicketDetailsPage() {
     );
   }
 
-<<<<<<< HEAD
   const nameOf = (userId: string | null | undefined) =>
     users.find((item) => item.id === userId)?.name;
 
-=======
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   const ticketId = ticket.id;
   const readonly = ticket.status === "Closed";
   const next = NEXT_STATUS[ticket.status];
   const agents = users.filter((item) => item.role === "agent" || item.role === "manager");
-<<<<<<< HEAD
   const assignmentRequired = next === "In Progress" && !ticket.assigneeId;
 
   async function onNote(event: FormEvent) {
     event.preventDefault();
     if (!note.trim()) return;
     setBlock((await addNote(ticketId, note.trim())) ?? "");
-=======
-
-  function onNote(event: FormEvent) {
-    event.preventDefault();
-    if (!note.trim()) return;
-    addNote(ticketId, note.trim());
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
     setNote("");
   }
 
@@ -73,12 +58,8 @@ export function TicketDetailsPage() {
           <StatusBadge status={ticket.status} />
         </div>
         <p className="mt-3 text-sm" style={{ color: "var(--muted)" }}>
-<<<<<<< HEAD
           {ticket.category} · Submitted by {nameOf(ticket.submitterId) ?? "Unknown"} ·{" "}
           {formatDate(ticket.createdAt)}
-=======
-          {ticket.category} · Submitted by {userById(ticket.submitterId)?.name} · {formatDate(ticket.createdAt)}
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
         </p>
         <div className="mt-8 rounded-[12px] p-6" style={{ background: "var(--surface)" }}>
           <h2 className="text-2xl">Description</h2>
@@ -123,11 +104,7 @@ export function TicketDetailsPage() {
                 </div>
                 <p className="mt-1">{item.message}</p>
                 <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
-<<<<<<< HEAD
                   {nameOf(item.userId) ?? "Unknown"} · {formatDate(item.at)}
-=======
-                  {userById(item.userId)?.name} · {formatDate(item.at)}
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
                 </p>
               </li>
             ))}
@@ -138,7 +115,6 @@ export function TicketDetailsPage() {
       <aside className="space-y-4">
         <div className="rounded-[12px] p-5" style={{ background: "var(--surface)" }}>
           <h2 className="text-xl">Assignment</h2>
-<<<<<<< HEAD
           <p className="mt-2 text-sm">{nameOf(ticket.assigneeId) ?? "Unassigned"}</p>
           {ticket.assignedById ? (
             <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
@@ -164,23 +140,6 @@ export function TicketDetailsPage() {
                 event.preventDefault();
                 if (!assignee) return;
                 setBlock((await assignTicket(ticketId, assignee)) ?? "");
-=======
-          <p className="mt-2 text-sm">{userById(ticket.assigneeId ?? "")?.name ?? "Unassigned"}</p>
-          {ticket.assignedById ? (
-            <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
-              Assigned by {userById(ticket.assignedById)?.name} · {ticket.assignedAt ? formatDate(ticket.assignedAt) : ""}
-            </p>
-          ) : null}
-
-          {!readonly && (user.role === "triage" || user.role === "manager") ? (
-            <form
-              className="mt-4 space-y-3"
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (!assignee) return;
-                const err = assignTicket(ticketId, assignee);
-                setBlock(err ?? "");
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
               }}
             >
               <label className="block text-sm">
@@ -207,37 +166,25 @@ export function TicketDetailsPage() {
             {next ? (
               <button
                 type="button"
-<<<<<<< HEAD
                 className="gold-btn mt-4 w-full rounded-[8px] py-2 text-sm font-semibold disabled:opacity-60"
                 onClick={async () => setBlock((await advanceStatus(ticketId)) ?? "")}
                 disabled={assignmentRequired}
                 aria-describedby={assignmentRequired ? "assignee-required" : undefined}
-=======
-                className="gold-btn mt-4 w-full rounded-[8px] py-2 text-sm font-semibold"
-                onClick={() => setBlock(advanceStatus(ticketId) ?? "")}
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
               >
                 Move to {next}
               </button>
             ) : null}
-<<<<<<< HEAD
             {assignmentRequired ? (
               <p id="assignee-required" className="mt-2 text-xs" style={{ color: "var(--muted)" }}>
                 Assign an agent before moving this ticket to In Progress.
               </p>
             ) : null}
-=======
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
             {ticket.status === "Resolved" && (user.role === "submitter" || user.role === "manager") ? (
               <button
                 type="button"
                 className="mt-3 w-full rounded-[8px] py-2 text-sm font-semibold"
                 style={{ border: "1px solid var(--border)" }}
-<<<<<<< HEAD
                 onClick={async () => setBlock((await closeTicket(ticketId)) ?? "")}
-=======
-                onClick={() => setBlock(closeTicket(ticketId) ?? "")}
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
               >
                 Close ticket
               </button>

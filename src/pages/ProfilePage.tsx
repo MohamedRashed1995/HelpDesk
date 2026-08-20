@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import { useAuth } from "../lib/auth";
-=======
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
 import { useApp } from "../lib/store";
 
 export function ProfilePage() {
   const { user, theme, setTheme } = useApp();
-<<<<<<< HEAD
   const { mode } = useAuth();
-=======
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
   if (!user) return null;
 
   return (
@@ -19,15 +13,11 @@ export function ProfilePage() {
         <Field label="Name" value={user.name} />
         <Field label="Corporate email" value={user.email} />
         <Field label="Role" value={user.title} />
-<<<<<<< HEAD
         <Field
           label="Authentication provider"
           value={mode === "firebase" ? "Firebase Authentication (email / password)" : "Local demo session"}
         />
         <Field label="Email verified" value={user.emailVerified ? "Yes" : "No"} />
-=======
-        <Field label="Authentication provider" value="Corporate SSO (OIDC / SAML)" />
->>>>>>> 95f43248261b9ce82ba6995324a329dbf0cdcc27
       </div>
       <div className="mt-6 rounded-[12px] p-6" style={{ background: "var(--surface)" }}>
         <h2 className="text-2xl">Appearance</h2>
